@@ -3,11 +3,15 @@ let ctx;
 let canvasDemo;
 let canvasDemoAnimation;
 
+if (!location.search) {
+    location.search = 500;
+}
+
 window.onload = function() {
     canvas = document.getElementById('myCanvas');
     ctx = canvas.getContext('2d');
-    ctx.canvas.width  = window.innerWidth;
-    ctx.canvas.height = window.innerHeight;
+    ctx.canvas.width  = 500;
+    ctx.canvas.height = 500;
     canvasDemo = new CanvasDemo(ctx, canvas.width, canvas.height);
     canvasDemo.animate(0);
 }
@@ -39,7 +43,10 @@ class CanvasDemo {
         this.angle;
 
         this.balls = [];
-        for (let i = 0; i < 3000; i++) {
+
+        const numberOfNodes = location.search.substring(1);
+
+        for (let i = 0; i < numberOfNodes; i++) {
             const distanceFromMiddle = Math.random() * Math.max(this.#width / 2, this.#height / 2);
             const color = `rgb(
                 ${Math.floor(Math.random() * 255)},
@@ -99,3 +106,12 @@ class CanvasDemo {
         canvasDemoAnimation = requestAnimationFrame(this.animate.bind(this));
     }
 }
+
+const timestampContainer = document.querySelector("#timestamp");
+
+const updateTimestamp = () => {
+    timestampContainer.innerText = Date.now();
+    requestAnimationFrame(updateTimestamp);
+};
+
+updateTimestamp();
