@@ -7,18 +7,14 @@
             padding: 0;
             box-sizing: border-box
         }
-        #myCanvas {
+        canvas {
             padding: 0;
-            margin: 20px auto;
             display: block;
             width: 500px;
             height: 500px;
-            position: relative;
+            position: absolute;
             top: 0;
-            bottom: 0;
             left: 0;
-            right: 0;
-            background-color: white;
             border: 1px solid black;
         }
         #content {
@@ -28,14 +24,23 @@
         #timestampH3 {
             margin-top:10px;
         }
+        .canvas-wrapper {
+            position: relative;
+            height: 500px;
+            width: 500px;
+            margin: 20px auto;
+        }
     </style>
 </head>
 <body id="content">
-    <h1>Demo app using ordinary Canvas</h1>
+    <h1>Demo app using offscreen Canvas</h1>
     <h3 id="timestampH3">
         Timestamp: <span id="timestamp"></span>
     </h3>
-    <canvas id="myCanvas"></canvas>
+    <div id="wrapper" class="canvas-wrapper">
+        <canvas id="myCanvas1"></canvas>
+        <canvas id="myCanvas2"></canvas>
+    </div>
     <div>
         <p>
             Point count:

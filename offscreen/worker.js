@@ -1,50 +1,20 @@
-let canvas;
-let ctx;
-let canvasDemo;
-let canvasDemoAnimation;
+let offscreenIndex;
 
 self.addEventListener('message', function (e) {
     const type = e.data.type;
     const numberOfNodes = e.data.numberOfNodes;
+    offscreenIndex = e.data.offscreenIndex;
 
     if (type === 'canvas') {
-        canvas = e.data.canvas;
-        ctx = canvas.getContext('2d');
+        const canvas = e.data.canvas;
+        const ctx = canvas.getContext('2d');
         ctx.canvas.width = 500;
         ctx.canvas.height = 500;
         canvasDemo = new CanvasDemo(ctx, canvas.width, canvas.height, numberOfNodes);
         canvasDemo.animate(0);
-    } else if (type === 'busy') {
-
-        if (key || !e.data.busy) {
-            clearInterval(key);
-        }
-
-        if (e.data.busy) {
-            key = setInterval(() => {
-                sleep(1000);
-            }, 3000);
-        }
     }
 
 });
-
-// window.onload = function () {
-//     canvas = document.getElementById('myCanvas');
-//     ctx = canvas.getContext('2d');
-//     ctx.canvas.width = 500;
-//     ctx.canvas.height = 500;
-//     canvasDemo = new CanvasDemo(ctx, canvas.width, canvas.height);
-//     canvasDemo.animate(0);
-// }
-
-// window.addEventListener('resize', function () {
-//     cancelAnimationFrame(canvasDemoAnimation);
-//     // canvas.width = window.innerWidth;
-//     // canvas.height = window.innerHeight;
-//     // canvasDemo = new CanvasDemo(ctx, canvas.width, canvas.height); // Fix canvas size when resizing window
-//     canvasDemo.animate(0);
-// })
 
 class Ball {
     constructor(position, color, offset, speed, size) {
@@ -90,7 +60,6 @@ class CanvasDemo {
                 15 * (Math.random() / 2 + 0.25)
             ));
         }
-        console.log(numberOfNodes)
     }
     #draw() {
         for (let i = 0; i < this.balls.length; i++) {
@@ -98,21 +67,23 @@ class CanvasDemo {
             this.#drawBall(ball);
         }
 
-        // draw FPS
-        this.#timeMeasurements.push(performance.now());
-        const msPassed = this.#timeMeasurements[this.#timeMeasurements.length - 1] - this.#timeMeasurements[0];
-        const updateEachSecond = 1;
-        const decimalPlaces = 2;
-        const decimalPlacesRatio = Math.pow(10, decimalPlaces);
-
-        if (msPassed >= updateEachSecond * 1000) {
-            this.#fps = Math.round(this.#timeMeasurements.length / msPassed * 1000 * decimalPlacesRatio) / decimalPlacesRatio;
-            this.#timeMeasurements = [];
+        if (offscreenIndex == 0) {
+            // draw FPS
+            this.#timeMeasurements.push(performance.now());
+            const msPassed = this.#timeMeasurements[this.#timeMeasurements.length - 1] - this.#timeMeasurements[0];
+            const updateEachSecond = 1;
+            const decimalPlaces = 2;
+            const decimalPlacesRatio = Math.pow(10, decimalPlaces);
+            
+            if (msPassed >= updateEachSecond * 1000) {
+                this.#fps = Math.round(this.#timeMeasurements.length / msPassed * 1000 * decimalPlacesRatio) / decimalPlacesRatio;
+                this.#timeMeasurements = [];
+            }
+            
+            this.#ctx.fillStyle = '#000';
+            this.#ctx.font = '30px Arial';
+            this.#ctx.fillText(`${this.#fps} fps`, 10, 40);
         }
-
-        this.#ctx.fillStyle = '#000';
-        ctx.font = '30px Arial';
-        this.#ctx.fillText(`${this.#fps} fps`, 10, 40);
     }
     #drawBall(ball) {
         const xMiddle = this.#width / 2;
@@ -134,15 +105,6 @@ class CanvasDemo {
         this.angle += this.deltatime * 0.001;
         this.#ctx.clearRect(0, 0, this.#width, this.#height);
         this.#draw(this.angle);
-        canvasDemoAnimation = requestAnimationFrame(this.animate.bind(this));
+        requestAnimationFrame(this.animate.bind(this));
     }
 }
-
-// const timestampContainer = document.querySelector("#timestamp");
-
-// const updateTimestamp = () => {
-//     timestampContainer.innerText = Date.now();
-//     requestAnimationFrame(updateTimestamp);
-// };
-
-// updateTimestamp();

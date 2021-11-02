@@ -1,11 +1,25 @@
-const offscreen = document.querySelector('#myCanvas').transferControlToOffscreen();
-const worker = new Worker('worker.js');
 
 if (!location.search) {
     location.search = 500;
 }
 
-worker.postMessage({canvas: offscreen, type: 'canvas', numberOfNodes: location.search.substring(1)}, [offscreen]);
+const nofNodes = location.search.substring(1);
+const offscreenProcessors = 5;
+const nofNodesPerWindow = Math.floor(nofNodes / offscreenProcessors);
+
+
+const wrapper = document.querySelector("#wrapper");
+for (let i = 0; i < offscreenProcessors; i++) {
+    const canv = document.createElement("canvas");
+    canv.id = "canvas-" + i;
+    canv.height = 500;
+    canv.width = 500;
+    wrapper.appendChild(canv);
+    const worker = new Worker('worker.js');
+    const offscreenCanvas = document.querySelector("#canvas-" + i).transferControlToOffscreen();
+    console.log(nofNodesPerWindow)
+    worker.postMessage({canvas: offscreenCanvas, type: 'canvas', numberOfNodes: nofNodesPerWindow, offscreenIndex: i}, [offscreenCanvas]);
+}
 
 const timestampContainer = document.querySelector("#timestamp");
 
