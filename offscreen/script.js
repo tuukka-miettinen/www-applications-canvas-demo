@@ -4,7 +4,7 @@ if (!location.search) {
 }
 
 const nofNodes = location.search.substring(1);
-const offscreenProcessors = 5;
+const offscreenProcessors = window.navigator.hardwareConcurrency - 1;
 const nofNodesPerWindow = Math.floor(nofNodes / offscreenProcessors);
 
 
@@ -17,7 +17,6 @@ for (let i = 0; i < offscreenProcessors; i++) {
     wrapper.appendChild(canv);
     const worker = new Worker('worker.js');
     const offscreenCanvas = document.querySelector("#canvas-" + i).transferControlToOffscreen();
-    console.log(nofNodesPerWindow)
     worker.postMessage({canvas: offscreenCanvas, type: 'canvas', numberOfNodes: nofNodesPerWindow, offscreenIndex: i}, [offscreenCanvas]);
 }
 
