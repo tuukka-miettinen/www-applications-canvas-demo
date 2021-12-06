@@ -40,10 +40,14 @@ class CanvasDemo {
   #height;
   #timeMeasurements;
   #fps;
+  #xMiddle;
+  #yMiddle;
   constructor(ctx, width, height, numberOfNodes) {
     this.#ctx = ctx;
     this.#width = width;
     this.#height = height;
+    this.#xMiddle = this.#width / 2;
+    this.#yMiddle = this.#height / 2;
     this.#timeMeasurements = [];
     this.#fps = 0;
 
@@ -100,14 +104,10 @@ class CanvasDemo {
     this.#ctx.fillText(`${this.#fps} fps`, 10, 40);
   }
   #drawBall(ball) {
-    const xMiddle = this.#width / 2;
-    const yMiddle = this.#height / 2;
     this.#ctx.beginPath();
     this.#ctx.arc(
-      xMiddle +
-        Math.sin((this.angle + ball.offset) * ball.speed) * ball.position,
-      yMiddle +
-        Math.cos((this.angle + ball.offset) * ball.speed) * ball.position,
+      this.#xMiddle + Math.sin((this.angle + ball.offset) * ball.speed) * ball.position,
+      this.#yMiddle + Math.cos((this.angle + ball.offset) * ball.speed) * ball.position,
       ball.size,
       0,
       2 * Math.PI
