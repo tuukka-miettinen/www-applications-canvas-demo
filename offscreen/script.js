@@ -1,10 +1,21 @@
-if (!location.search) {
-  location.search = 500;
-}
-
-const nofNodes = location.search.substring(1);
-const offscreenProcessors = 10 // window.navigator.hardwareConcurrency - 1;
+const nofNodes = params.points ? params.points : 250;
+const maxProcessors = window.navigator.hardwareConcurrency - 1;
+const offscreenProcessors = params.workers ? params.workers > maxProcessors ? maxProcessors : params.workers : maxProcessors < 3 ? maxProcessors : 3;
 const nofNodesPerWindow = Math.floor(nofNodes / offscreenProcessors);
+
+let worker_selection_text = '<span>Worker count: ';
+for (let i = 1; i <= maxProcessors; i++) {
+  urlSearchParams.set("workers", i)
+  worker_selection_text += '<a href="?' + urlSearchParams + '">' + i + '</a>';
+  if (i < maxProcessors) {
+    worker_selection_text += ', '
+  }
+}
+worker_selection_text += '</span>';
+
+document.getElementById("worker_count_selector").innerHTML = worker_selection_text;
+
+document.getElementById("worker_count").textContent = "Selected worker count: " + offscreenProcessors;
 
 const wrapper = document.querySelector("#wrapper");
 for (let i = 0; i < offscreenProcessors; i++) {

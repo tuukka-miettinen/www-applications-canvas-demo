@@ -6,11 +6,11 @@ let timeMeasurements = [];
 let fps = 0;
 // time at first run
 var t0 = Date.now();
-let numberOfNodes = 50;
+let numberOfNodes = 250;
 
 // get number of nodes from url, defaults to 50
-if (location.search) {
-  numberOfNodes = location.search.substring(1);
+if (params.points) {
+  numberOfNodes = params.points;
 }
 
 // initialize balls array with randomized values for each

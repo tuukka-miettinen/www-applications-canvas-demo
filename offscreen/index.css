@@ -8,9 +8,15 @@ canvas {
   left: 0;
   border: 1px solid black;
 }
+
 .canvas-wrapper {
   position: relative;
   height: 750px;
   width: 750px;
   margin: 20px auto;
+}
+
+#worker_count_selector {
+  margin: 0;
+  padding: 0;
 }

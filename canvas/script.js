@@ -3,9 +3,7 @@ let ctx;
 let canvasDemo;
 let canvasDemoAnimation;
 
-if (!location.search) {
-  location.search = 500;
-}
+const nofNodes = params.points ? params.points : 250;
 
 window.onload = function () {
   canvas = document.getElementById("myCanvas");
@@ -16,7 +14,7 @@ window.onload = function () {
     ctx,
     canvas.width,
     canvas.height,
-    location.search.substring(1)
+    nofNodes
   );
   canvasDemo.animate(0);
 };
