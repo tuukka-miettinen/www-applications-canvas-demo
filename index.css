@@ -1,0 +1,56 @@
+.content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+
+  font-family: "Saira";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
+}
+
+.list {
+  font-size: 20px;
+}
+
+button {
+  font-family: "Saira";
+  transition: 0.1s all ease-in;
+  background-color: #575757; /* Green */
+  border: 1px solid rgb(17, 17, 17);
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #a3a3a3;
+}
+
+button:active {
+  background-color: #2b2b2b;
+}
+
+.axisX {
+  font-family: "Saira";
+  font-size: 28px;
+}
+
+.axisY {
+  font-family: "Saira";
+  font-size: 14px;
+}
