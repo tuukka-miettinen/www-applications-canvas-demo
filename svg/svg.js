@@ -24,7 +24,7 @@ for (let i = 0; i < numberOfNodes; i++) {
     R: distanceFromMiddle,
     color: color,
     phi0: Math.random() * 360,
-    speed: Math.random() * 30,
+    speed: Math.random() / 2 + 0.5,
     r: 15 * (Math.random() / 2 + 0.25),
   });
 }
@@ -75,7 +75,7 @@ container
 d3.timer(function () {
   var delta = Date.now() - t0;
   svg.selectAll(".ball").attr("transform", function (d) {
-    return "rotate(" + -1 * (d.phi0 + (delta * d.speed) / 200) + ")";
+    return "rotate(" + (d.phi0 + (delta * d.speed) * 0.025) + ")";
   });
 
   // draw FPS

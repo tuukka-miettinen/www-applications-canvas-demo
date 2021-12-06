@@ -28,7 +28,7 @@ for (let i = 0; i < offscreenProcessors; i++) {
   );
 }
 
-// const timestampContainer = document.querySelector("#timestamp");
+const timestampContainer = document.querySelector("#timestamp");
 
 const updateTimestamp = () => {
   timestampContainer.innerText = Date.now();

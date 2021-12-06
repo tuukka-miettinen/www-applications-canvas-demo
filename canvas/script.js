@@ -121,7 +121,7 @@ class CanvasDemo {
   animate(timestamp) {
     this.deltatime = timestamp - this.lasttime;
     this.lasttime = timestamp;
-    this.angle += this.deltatime * 0.001;
+    this.angle -= this.deltatime * 0.001;
     this.#ctx.clearRect(0, 0, this.#width, this.#height);
     this.#draw(this.angle);
     canvasDemoAnimation = requestAnimationFrame(this.animate.bind(this));
