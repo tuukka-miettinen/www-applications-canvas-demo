@@ -1,0 +1,16 @@
+canvas {
+  padding: 0;
+  display: block;
+  width: 750px;
+  height: 750px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 1px solid black;
+}
+.canvas-wrapper {
+  position: relative;
+  height: 750px;
+  width: 750px;
+  margin: 20px auto;
+}

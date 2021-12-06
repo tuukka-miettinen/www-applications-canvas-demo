@@ -1,0 +1,14 @@
+#myCanvas {
+  padding: 0;
+  margin: 20px auto;
+  display: block;
+  width: 750px;
+  height: 750px;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid black;
+}

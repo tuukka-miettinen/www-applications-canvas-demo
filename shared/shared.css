@@ -1,0 +1,16 @@
+#content {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#timestampH3 {
+    margin-top: 10px;
+}
+
+.container {
+    font-family: "Saira";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}

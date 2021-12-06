@@ -2,18 +2,18 @@
 <html>
 
 <head>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link rel="stylesheet" href="index.css" />
   <link href="https://fonts.googleapis.com/css?family=Saira:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
-  <link href="./index.css" rel="stylesheet" />
   <link href="../shared/shared.css" rel="stylesheet" />
 </head>
 
 <body id="content">
   <div class="container">
-    <h1>Demo app using offscreen Canvas</h1>
+    <h1>Demo app using SVG</h1>
     <h3 id="timestampH3">Timestamp: <span id="timestamp"></span></h3>
-    <div id="wrapper" class="canvas-wrapper">
-      <canvas id="myCanvas"></canvas>
-    </div>
+    <div id="balls"></div>
+    <script src="svg.js"></script>
     <div id="point_count_selector"></div>
     </br>
     <a href="../index.html">Back to demo main page</a>
@@ -22,7 +22,6 @@
       <embed type="text/html" src="../shared/scroll.html" width="500" height="200">
     </div>
   </div>
-  <script src="script.js"></script>
   <script src="../shared/shared.js"></script>
 </body>
 
