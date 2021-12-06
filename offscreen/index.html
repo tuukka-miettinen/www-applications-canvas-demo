@@ -7,18 +7,14 @@
         padding: 0;
         box-sizing: border-box;
       }
-      #myCanvas {
+      canvas {
         padding: 0;
-        margin: 20px auto;
         display: block;
-        width: 750;
-        height: 750;
-        position: relative;
+        width: 500px;
+        height: 500px;
+        position: absolute;
         top: 0;
-        bottom: 0;
         left: 0;
-        right: 0;
-        background-color: white;
         border: 1px solid black;
       }
       #content {
@@ -28,21 +24,30 @@
       #timestampH3 {
         margin-top: 10px;
       }
+      .canvas-wrapper {
+        position: relative;
+        height: 500px;
+        width: 500px;
+        margin: 20px auto;
+      }
     </style>
   </head>
   <body id="content">
-    <h1>Demo app using ordinary Canvas</h1>
+    <h1>Demo app using offscreen Canvas</h1>
     <h3 id="timestampH3">Timestamp: <span id="timestamp"></span></h3>
-    <canvas id="myCanvas"></canvas>
+    <div id="wrapper" class="canvas-wrapper">
+      <canvas id="myCanvas"></canvas>
+    </div>
     <div>
       <p>
         Point count:
         <a href="?500">500 points</a> | <a href="?1000">1000 points</a> |
         <a href="?3000">3000 points</a> | <a href="?5000">5000 points</a> |
-        <a href="?10000">10000 points</a> |
+        <a href="?10000">10000 points</a> | <a href="?25000">25000 points</a> |
         <a href="?50000">50000 points</a>
       </p>
     </div>
+    <a href="../index.html">back</a>
     <script src="script.js"></script>
   </body>
 </html>

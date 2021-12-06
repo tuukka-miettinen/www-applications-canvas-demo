@@ -9,9 +9,12 @@ if (!location.search) {
 
 window.onload = function () {
   canvas = document.getElementById("myCanvas");
-  ctx = canvas.getContext("2d");
-  ctx.canvas.width = 750;
-  ctx.canvas.height = 750;
+  ctx = canvas.getContext("2d", {
+    desynchronized: true,
+    // Other options. See below.
+  });
+  ctx.canvas.width = 500;
+  ctx.canvas.height = 500;
   canvasDemo = new CanvasDemo(
     ctx,
     canvas.width,
