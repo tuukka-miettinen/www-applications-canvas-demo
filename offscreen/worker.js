@@ -55,7 +55,7 @@ class CanvasDemo {
             this.balls.push(new Ball(
                 position,
                 color,
-                Math.random() * 360,
+                Math.floor(Math.random() * 360),
                 Math.random() / 2 + 0.5,
                 15 * (Math.random() / 2 + 0.25)
             ));
@@ -86,8 +86,8 @@ class CanvasDemo {
         }
     }
     #drawBall(ball) {
-        const xMiddle = this.#width / 2;
-        const yMiddle = this.#height / 2;
+        const xMiddle = Math.floor(this.#width / 2);
+        const yMiddle = Math.floor(this.#height / 2);
         this.#ctx.beginPath();
         this.#ctx.arc(
             xMiddle + Math.sin((this.angle + ball.offset) * ball.speed) * ball.position,

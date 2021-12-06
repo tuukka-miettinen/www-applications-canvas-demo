@@ -105,6 +105,7 @@ class CanvasDemo {
             0, 
             2*Math.PI);
         this.#ctx.fillStyle = ball.color;
+        this.#ctx.lineWidth = 0;
         this.#ctx.fill();
         this.#ctx.stroke();
     }

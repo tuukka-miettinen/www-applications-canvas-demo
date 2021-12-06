@@ -67,8 +67,8 @@ class CanvasDemo {
         }
     }
     #drawBall(angle, ball) {
-        const xMiddle = this.#width / 2;
-        const yMiddle = this.#height / 2;
+        const xMiddle = Math.floor(this.#width / 2);
+        const yMiddle = Math.floor(this.#height / 2);
         this.#ctx.beginPath();
         this.#ctx.arc(
             xMiddle + Math.sin((angle + ball.offset) * ball.speed) * ball.position,
