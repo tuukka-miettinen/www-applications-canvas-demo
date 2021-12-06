@@ -8,8 +8,8 @@ self.addEventListener("message", function (e) {
   if (type === "canvas") {
     const canvas = e.data.canvas;
     const ctx = canvas.getContext("2d");
-    ctx.canvas.width = 500;
-    ctx.canvas.height = 500;
+    ctx.canvas.width = 750;
+    ctx.canvas.height = 750;
     canvasDemo = new CanvasDemo(
       ctx,
       canvas.width,

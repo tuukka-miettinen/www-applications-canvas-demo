@@ -3,7 +3,7 @@ if (!location.search) {
 }
 
 const nofNodes = location.search.substring(1);
-const offscreenProcessors = window.navigator.hardwareConcurrency - 1;
+const offscreenProcessors = 10 // window.navigator.hardwareConcurrency - 1;
 const nofNodesPerWindow = Math.floor(nofNodes / offscreenProcessors);
 
 const wrapper = document.querySelector("#wrapper");
@@ -28,7 +28,7 @@ for (let i = 0; i < offscreenProcessors; i++) {
   );
 }
 
-const timestampContainer = document.querySelector("#timestamp");
+// const timestampContainer = document.querySelector("#timestamp");
 
 const updateTimestamp = () => {
   timestampContainer.innerText = Date.now();

@@ -1,10 +1,11 @@
-# www demo thingy
+# WWW Applications D - Canvas project demo
 
 ## To play the demos:
 
-1. cd to directory
-   1. `cd offscreen`
-2. install https://github.com/tapio/live-server
-   1. `npm install -g live-server`
-3. run live server
-   1. `live-server`
+### Host a http server:
+
+1. `python -m http.server 8000`
+
+or if you want live reload when making changes
+1. install https://github.com/tapio/live-server
+2.  `npm install -g live-server`

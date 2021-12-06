@@ -1,32 +1,27 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link
-      href="https://fonts.googleapis.com/css?family=Saira:100,200,300,400,500,600,700,800,900"
-      rel="stylesheet"
-    />
-    <link
-    href="index.css"
-    rel="stylesheet"
-  />
-  </head>
-  <body id="content">
-    <div class="container">
-      <h1>Demo app using ordinary Canvas</h1>
-      <h3 id="timestampH3">Timestamp: <span id="timestamp"></span></h3>
-      <canvas id="myCanvas"></canvas>
-      <div>
-        <p>
-          Point count:
-          <a href="?500">500 points</a> | <a href="?1000">1000 points</a> |
-          <a href="?3000">3000 points</a> | <a href="?5000">5000 points</a> |
-          <a href="?10000">10000 points</a> | <a href="?25000">25000 points</a> |
-          <a href="?50000">50000 points</a>
-        </p>
-      </div>
+
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Saira:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
+  <link href="./index.css" rel="stylesheet" />
+  <link href="../shared/shared.css" rel="stylesheet" />
+</head>
+
+<body id="content">
+  <div class="container">
+    <h1>Demo app using Canvas</h1>
+    <h3 id="timestampH3">Timestamp: <span id="timestamp"></span></h3>
+    <canvas id="myCanvas"></canvas>
+    <div id="point_count_selector"></div>
     </br>
     <a href="../index.html">Back to demo main page</a>
+    </br>
+    <div class="scroll-demo">
+      <embed type="text/html" src="../shared/scroll.html" width="500" height="200">
     </div>
-    <script src="script.js"></script>
-  </body>
+  </div>
+  <script src="script.js"></script>
+  <script src="../shared/shared.js"></script>
+</body>
+
 </html>
