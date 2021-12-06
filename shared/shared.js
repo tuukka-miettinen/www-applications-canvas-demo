@@ -1,4 +1,4 @@
-const points = [50, 500, 1000, 5000, 10000, 50000];
+const points = [50, 100, 250, 500, 1000, 2500, 5000, 10000, 25000];
 
 let html_text = '<p>Point count: ';
 for (let i = 0; i < points.length; i++) {

@@ -40,18 +40,9 @@ var container = svg
 // add fps text
 container
   .append("text")
-  .text("FPS: " + fps)
   .attr("class", "fpsText")
   .attr("x", -(w / 2) + 8)
   .attr("y", -(h / 2) + 28);
-
-// add points text
-container
-  .append("text")
-  .text("Points: " + numberOfNodes)
-  .attr("class", "fpsText")
-  .attr("x", -(w / 2) + 8)
-  .attr("y", -(h / 2) + 56);
 
 // loop through balls array and add to svg
 container
@@ -93,7 +84,7 @@ d3.timer(function () {
       ) / decimalPlacesRatio;
     timeMeasurements = [];
   }
-  container.select("text").text("FPS: " + fps);
+  container.select("text").text(Math.floor(fps) + " fps");
 });
 
 const timestampContainer = document.querySelector("#timestamp");
