@@ -1,31 +1,36 @@
-let canvas;
-let ctx;
-let canvasDemo;
-let canvasDemoAnimation;
 
 if (!location.search) {
     location.search = 500;
 }
 
+const offscreenProcessors = window.navigator.hardwareConcurrency - 1;
+const nofNodes = location.search.substring(1);
+const nofNodesPerWindow = Math.floor(nofNodes / offscreenProcessors);
+
 window.onload = function() {
+    const workers = []
+    const wrapper = document.querySelector("#wrapper");
+    
+    for (let i = 0; i < offscreenProcessors; i++) {
+        const canv = document.createElement("canvas");
+        canv.id = "canvas-" + i;
+        canv.height = 500;
+        canv.width = 500;
+        wrapper.appendChild(canv);
+        const worker = new Worker('worker2.js');
+        const offscreenCanvas = document.querySelector("#canvas-" + i).transferControlToOffscreen();
+        worker.postMessage({canvas: offscreenCanvas, type: 'canvas', numberOfNodes: nofNodesPerWindow, offscreenIndex: i}, [offscreenCanvas]);
+        workers.push(worker)
+    }
+
     canvas = document.getElementById('myCanvas');
-    ctx = canvas.getContext('2d', { 
-        desynchronized: true,
-        // Other options. See below.
-    });
+    ctx = canvas.getContext('2d');
     ctx.canvas.width  = 500;
     ctx.canvas.height = 500;
-    canvasDemo = new CanvasDemo(ctx, canvas.width, canvas.height, location.search.substring(1));
+    canvasDemo = new CanvasDemo(ctx, canvas.width, canvas.height, location.search.substring(1), workers);
     canvasDemo.animate(0);
 }
 
-window.addEventListener('resize', function() {
-    cancelAnimationFrame(canvasDemoAnimation);
-    // canvas.width = window.innerWidth;
-    // canvas.height = window.innerHeight;
-    // canvasDemo = new CanvasDemo(ctx, canvas.width, canvas.height); // Fix canvas size when resizing window
-    canvasDemo.animate(0);
-})
 
 class Ball {
     constructor(position, color, offset, speed, size) {
@@ -43,13 +48,14 @@ class CanvasDemo {
     #height;
     #timeMeasurements;
     #fps;
-    constructor(ctx, width, height, numberOfNodes) {
+    #workers;
+    constructor(ctx, width, height, numberOfNodes, workers) {
         this.#ctx = ctx;
         this.#width = width;
         this.#height = height;
         this.#timeMeasurements = [];
+        this.#workers = workers;
         this.#fps = 0;
-
         this.lasttime = 0;
         this.deltatime = 0;
         this.angle = 0;
@@ -73,50 +79,61 @@ class CanvasDemo {
         }
     }
     #draw() {
-        for (let i = 0; i < this.balls.length; i++) {
-            const ball = this.balls[i];
-            this.#drawBall(ball);
-        }
-        
-        // draw FPS
         this.#timeMeasurements.push(performance.now());
         const msPassed = this.#timeMeasurements[this.#timeMeasurements.length - 1] - this.#timeMeasurements[0];
         const updateEachSecond = 1;
         const decimalPlaces = 2;
         const decimalPlacesRatio = Math.pow(10, decimalPlaces);
-
+        
         if (msPassed >= updateEachSecond * 1000) {
             this.#fps = Math.round(this.#timeMeasurements.length / msPassed * 1000 * decimalPlacesRatio) / decimalPlacesRatio;
             this.#timeMeasurements = [];
         }
-
+        
         this.#ctx.fillStyle = '#000';
-        ctx.font = '30px Arial';
+        this.#ctx.font = '30px Arial';
         this.#ctx.fillText(`${this.#fps} fps`, 10, 40);
     }
-    #drawBall(ball) {
-        const xMiddle = this.#width / 2;
-        const yMiddle = this.#height / 2;
-        this.#ctx.beginPath();
-        this.#ctx.arc(
-            xMiddle + Math.sin((this.angle + ball.offset)*ball.speed)*ball.position, 
-            yMiddle + Math.cos((this.angle + ball.offset)*ball.speed)*ball.position, 
-            ball.size, 
-            0, 
-            2*Math.PI);
-        this.#ctx.fillStyle = ball.color;
-        this.#ctx.fill();
-        this.#ctx.stroke();
-    }
     animate(timestamp) {
+        this.#ctx.clearRect(0, 0, this.#width, this.#height);
         this.deltatime = timestamp - this.lasttime;
         this.lasttime = timestamp;
         this.angle += this.deltatime * 0.001;
-        this.#ctx.clearRect(0, 0, this.#width, this.#height);
-        this.#draw(this.angle);
-        canvasDemoAnimation = requestAnimationFrame(this.animate.bind(this));
+        this.#draw();
+        for (let i = 0; i < offscreenProcessors; i++) {
+            const worker = this.#workers[i]
+            worker.postMessage({type: 'draw', angle: this.angle}, []);
+        }
+        requestAnimationFrame(this.animate.bind(this));
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// timestamp
 
 const timestampContainer = document.querySelector("#timestamp");
 
