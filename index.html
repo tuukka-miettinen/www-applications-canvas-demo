@@ -1,32 +1,33 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <link
-    href="https://fonts.googleapis.com/css?family=Saira:100,200,300,400,500,600,700,800,900"
-    rel="stylesheet"
-  />
-    <link rel="stylesheet" href="index.css"></link>
-    <script src="https://d3js.org/d3.v4.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Saira:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
+  <link rel="stylesheet" href="index.css">
+  </link>
+  <script src="https://d3js.org/d3.v4.js"></script>
 </head>
+
 <body>
-    <div class="content" style="margin-top: 50px;">
-        <h1>WWW Applications Demo</h1>
-        <div class="list">
-            <p>A quick visual comparison between:</p>
-            <ul>
-                <li><a href = "./canvas/index.html?points=250">Canvas demo</a></li>
-                <li><a href = "./offscreen/index.html?points=250">Offscreen Canvas demo</a></li>
-                <li><a href = "./svg/index.html?points=250">SVG demo</a></li>
-            </ul>
-        </div>
-        <h2>FPS comparison (165hz screen)</h2>
-        <div class="buttons">
-            <button onclick="update(data1)">500 points</button>
-            <button onclick="update(data2)">1000 points</button>
-            <button onclick="update(data3)">3000 points</button>
-        </div>
-        <div id="my_dataviz"></div>
+  <div class="content" style="margin-top: 50px;">
+    <h1>WWW Applications Demo</h1>
+    <div class="list">
+      <p>A quick visual comparison between:</p>
+      <ul>
+        <li><a href="./canvas/index.html?points=250">Canvas demo</a></li>
+        <li><a href="./offscreen/index.html?points=250">Offscreen Canvas demo</a></li>
+        <li><a href="./svg/index.html?points=250">SVG demo</a></li>
+      </ul>
     </div>
-    <script src="charts.js"></script>
+    <h2>FPS comparison (165hz screen)</h2>
+    <div class="buttons">
+      <button onclick="update(data1)">500 points</button>
+      <button onclick="update(data2)">1000 points</button>
+      <button onclick="update(data3)">3000 points</button>
+    </div>
+    <div id="my_dataviz"></div>
+  </div>
+  <script src="charts.js"></script>
 </body>
+
 </html>

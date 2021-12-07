@@ -92,8 +92,8 @@ class CanvasDemo {
         this.#fps =
           Math.round(
             (this.#timeMeasurements.length / msPassed) *
-              1000 *
-              decimalPlacesRatio
+            1000 *
+            decimalPlacesRatio
           ) / decimalPlacesRatio;
         this.#timeMeasurements = [];
       }

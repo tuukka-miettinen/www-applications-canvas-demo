@@ -4,6 +4,7 @@
   box-sizing: border-box;
   font-family: "Saira";
 }
+
 .content {
   display: flex;
   align-items: center;
@@ -25,7 +26,8 @@
 button {
   font-family: "Saira";
   transition: 0.1s all ease-in;
-  background-color: #575757; /* Green */
+  background-color: #575757;
+  /* Green */
   border: 1px solid rgb(17, 17, 17);
   color: white;
   padding: 15px 32px;
