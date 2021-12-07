@@ -11,8 +11,8 @@ self.addEventListener('message', function (e) {
       desynchronized: true,
       // Other options. See below.
     });
-    ctx.canvas.width = 500;
-    ctx.canvas.height = 500;
+    ctx.canvas.width = 750;
+    ctx.canvas.height = 750;
     canvasDemo = new CanvasDemo(ctx, canvas.width, canvas.height, numberOfNodes);
   }
   if (type === 'draw') {

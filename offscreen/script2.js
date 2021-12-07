@@ -1,11 +1,21 @@
-
-if (!location.search) {
-  location.search = 500;
-}
-
-const offscreenProcessors = window.navigator.hardwareConcurrency - 1;
-const nofNodes = location.search.substring(1);
+const nofNodes = params.points ? params.points : 250;
+const maxProcessors = window.navigator.hardwareConcurrency - 1;
+const offscreenProcessors = params.workers ? params.workers > maxProcessors ? maxProcessors : params.workers : maxProcessors < 3 ? maxProcessors : 3;
 const nofNodesPerWindow = Math.floor(nofNodes / offscreenProcessors);
+
+let worker_selection_text = '<span>Worker count: ';
+for (let i = 1; i <= maxProcessors; i++) {
+  urlSearchParams.set("workers", i)
+  worker_selection_text += '<a href="?' + urlSearchParams + '">' + i + '</a>';
+  if (i < maxProcessors) {
+    worker_selection_text += ', '
+  }
+}
+worker_selection_text += '</span>';
+
+document.getElementById("worker_count_selector").innerHTML = worker_selection_text;
+
+document.getElementById("worker_count").textContent = "Selected worker count: " + offscreenProcessors;
 
 window.onload = function () {
   const workers = []
@@ -14,8 +24,8 @@ window.onload = function () {
   for (let i = 0; i < offscreenProcessors; i++) {
     const canv = document.createElement("canvas");
     canv.id = "canvas-" + i;
-    canv.height = 500;
-    canv.width = 500;
+    canv.height = 750;
+    canv.width = 750;
     wrapper.appendChild(canv);
     const worker = new Worker('worker2.js');
     const offscreenCanvas = document.querySelector("#canvas-" + i).transferControlToOffscreen();
@@ -25,8 +35,8 @@ window.onload = function () {
 
   canvas = document.getElementById('myCanvas');
   ctx = canvas.getContext('2d');
-  ctx.canvas.width = 500;
-  ctx.canvas.height = 500;
+  ctx.canvas.width = 750;
+  ctx.canvas.height = 750;
   canvasDemo = new CanvasDemo(ctx, canvas.width, canvas.height, location.search.substring(1), workers);
   canvasDemo.animate(0);
 }

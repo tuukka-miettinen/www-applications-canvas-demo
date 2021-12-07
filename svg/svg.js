@@ -84,7 +84,7 @@ d3.timer(function () {
       ) / decimalPlacesRatio;
     timeMeasurements = [];
   }
-  container.select("text").text(Math.floor(fps) + " fps");
+  container.select("text").text(fps + " fps");
 });
 
 const timestampContainer = document.querySelector("#timestamp");
