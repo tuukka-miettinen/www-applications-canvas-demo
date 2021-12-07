@@ -78,12 +78,9 @@ class CanvasDemo {
     }
   }
   #draw() {
-    const chonks = Math.floor(this.balls.length / 1000);
-    for (let c = 0; c < chonks; i++) {
-      for (let i = 0; i < this.balls.length; i++) {
-        const ball = this.balls[i];
-        this.#drawBall(ball);
-      }
+    for (let i = 0; i < this.balls.length; i++) {
+      const ball = this.balls[i];
+      this.#drawBall(ball);
     }
 
     // draw FPS
@@ -108,7 +105,7 @@ class CanvasDemo {
     this.#ctx.fillText(`${this.#fps} fps`, 10, 40);
   }
   #drawBall(ball) {
-    this.#ctx.beginPath(); F
+    this.#ctx.beginPath();
     this.#ctx.arc(
       this.#xMiddle + Math.sin((this.angle + ball.offset) * ball.speed) * ball.position,
       this.#yMiddle + Math.cos((this.angle + ball.offset) * ball.speed) * ball.position,
